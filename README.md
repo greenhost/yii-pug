@@ -1,6 +1,6 @@
 Note:
 -----
-__This is simply a renamed version of [github.com/greenhost/yii-jade](github.com/greenhost/yii-jade), yii-jade will no longer be maintained.__
+__This is simply a renamed version of [github.com/greenhost/yii-jade](https://github.com/greenhost/yii-jade), yii-jade will no longer be maintained.__
 
 Yii-pug
 ========
