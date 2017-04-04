@@ -1,9 +1,9 @@
 {
-	"name": "greenhost/yii-jade",
-	"description": "Fork of Yii's extension for Jade template system",
+	"name": "greenhost/yii-pug",
+	"description": "Fork of Yii's extension for pug template system",
 	"license" : "New BSD License",
-	"homepage": "https://github.com/greenhost/yii-jade",
+	"homepage": "https://github.com/greenhost/yii-pug",
 	"require": {
-		"talesoft/tale-jade": "^1.4"
+		"talesoft/tale-pug": "^1.4"
 	}
 }

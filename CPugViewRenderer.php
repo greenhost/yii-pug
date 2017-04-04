@@ -1,6 +1,6 @@
 <?php
 /**
- * CJadeViewRenderer class file.
+ * CPugViewRenderer class file.
  *
  * @author Fabrizio Monti <fabrizio.monti@welaika.com>
  * @link http://welaika.com
@@ -22,14 +22,14 @@
  * @license http://www.yiiframework.com/license/
  */
 
-use Tale\Jade;
+use Tale\Pug;
 
-class CJadeViewRenderer extends CViewRenderer
+class CPugViewRenderer extends CViewRenderer
 {
   /**
-   * @var Jade the Jade parser
+   * @var Pug the Pug parser
    */
-  private $jade;
+  private $pug;
   /**
    * @var boolean whether to store the parsing results in the application's
    * runtime directory. Defaults to true. If false, the parsing results will
@@ -43,9 +43,9 @@ class CJadeViewRenderer extends CViewRenderer
    */
   public $filePermission=0755;
   /**
-   * @var string the extension of input view file. Defaults to '.jade'.
+   * @var string the extension of input view file. Defaults to '.pug'.
    */
-  public $fileExtension='.jade';
+  public $fileExtension='.pug';
 
   /**
    * @var string the extension of output view file. Defaults to '.php'
@@ -58,17 +58,17 @@ class CJadeViewRenderer extends CViewRenderer
   public $prepend;
 
   /**
-   * @var array the jade configuration for tale-jade, supplied to the
+   * @var array the pug configuration for tale-pug, supplied to the
    * constructor of Renderer
    */
-  public $taleJadeConfig = [];
+  public $talePugConfig = [];
 
   /**
-   * Init a Jade parser instance
+   * Init a Pug parser instance
    */
   public function init() {
     parent::init();
-    $this->jade = new Jade\Compiler($this->taleJadeConfig);
+    $this->pug = new Pug\Compiler($this->talePugConfig);
   }
 
   /**
@@ -79,10 +79,10 @@ class CJadeViewRenderer extends CViewRenderer
   protected function generateViewFile($sourceFile,$viewFile)
   {
     if (substr($sourceFile, strlen($this->fileExtension) * -1) === $this->fileExtension) {
-      if ($this->jade == null)
+      if ($this->pug == null)
         $this->init();
 
-      $data = $this->jade->compileFile($sourceFile);
+      $data = $this->pug->compileFile($sourceFile);
     } else {
       $data = file_get_contents($sourceFile);
     }
@@ -100,16 +100,16 @@ class CJadeViewRenderer extends CViewRenderer
    */
   public function renderFile($context,$sourceFile,$data,$return)
   {
-    $jadeSourceFile = substr($sourceFile, 0, strrpos($sourceFile, '.')).$this->fileExtension;
+    $pugSourceFile = substr($sourceFile, 0, strrpos($sourceFile, '.')).$this->fileExtension;
 
-    if(!is_file($jadeSourceFile) || ($file=realpath($jadeSourceFile))===false)
+    if(!is_file($pugSourceFile) || ($file=realpath($pugSourceFile))===false)
       return parent::renderFile($context, $sourceFile, $data, $return);
 
     $viewFile = $this->getViewFile($sourceFile);
     $viewFile = str_replace($this->fileExtension.($this->useRuntimePath?'':'c'), $this->viewFileExtension, $viewFile);
 
-    // Included Jade files do not cause the cache to be invalidated.
-    // By forcing a flush you can make Jade regenerate all views.
+    // Included Pug files do not cause the cache to be invalidated.
+    // By forcing a flush you can make Pug regenerate all views.
     $forceRefresh = array_key_exists('_flush', $_GET);
 
     if(@filemtime($sourceFile) > @filemtime($viewFile) || $forceRefresh)
