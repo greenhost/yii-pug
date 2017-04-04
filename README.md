@@ -1,5 +1,10 @@
+Note:
+-----
+__This is simply a renamed version of [github.com/greenhost/yii-jade](github.com/greenhost/yii-jade), yii-jade will no longer be maintained.__
+
 Yii-pug
 ========
+
 Yii's extension for Pug template system
 
 ## Instructions
